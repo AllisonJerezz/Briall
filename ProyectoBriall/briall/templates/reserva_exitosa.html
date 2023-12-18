@@ -1,0 +1,10 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+  <h1 style="padding-top: 150px; text-align: center; font-family: 'Signika Negative', sans-serif;">Reserva exitosa</h1>
+  <p style="text-align: center; font-family: 'Signika Negative', sans-serif;">¡Tu reserva ha sido realizada con éxito!</p>
+  <div style="text-align: center;">
+    <a href="{% url 'ver_oficinas' %}" class="btn btn-outline-dark" style="font-family: 'Signika Negative', sans-serif;">Oficinas</a>
+    <a href="{% url 'mis_reservas' %}" class="btn btn-outline-dark" style="font-family: 'Signika Negative', sans-serif;">Mis reservas</a>  
+  </div>
+{% endblock %}

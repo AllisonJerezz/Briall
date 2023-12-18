@@ -1,0 +1,10 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+  <h1 style="padding-top: 140px; text-align: center; margin-bottom: 25px; font-family: 'Signika Negative', sans-serif;">Modificar reserva</h1>
+  <form method="post" action="{% url 'reserva_reagendada' reserva.id %}" style="text-align: center; font-family: 'Signika Negative', sans-serif;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-outline-dark">Reagendar</button>
+  </form>
+{% endblock %}

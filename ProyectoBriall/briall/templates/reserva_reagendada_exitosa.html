@@ -1,0 +1,11 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<h1 style="padding-top: 140px; text-align: center; margin-bottom: 25px; font-family: 'Signika Negative', sans-serif;">¡Reserva modificada con éxito!</h1>
+<p style="text-align: center; font-family: 'Signika Negative', sans-serif;">Tu reserva ha sido reagendada con éxito.</p>
+<div style="text-align: center;">
+    <a href="{% url 'mis_reservas' %}" class="btn btn-outline-dark">Volver a mis reservas</a>
+    <a href="{% url 'index' %}" class="btn btn-outline-dark">Volver al inicio</a>
+</div>
+
+{% endblock %}

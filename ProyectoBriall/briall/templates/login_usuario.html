@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <title>Document</title>
+    </head>
+    <body>
+        {% block content %}
+        <form class="contleainer" style="padding-left: 620px;" method="post" action="{% url 'login_usuario' %}">
+            {% csrf_token %}
+            <h1 style="padding-top: 80px; padding-bottom: 30px;" class="titulo_registro">Inicia sesión</h1>
+            {{error}} 
+            {{ form.as_p }}
+            <button type="submit">Enviar</button>
+        </form>
+        {% endblock %}
+    </body>
+</html>

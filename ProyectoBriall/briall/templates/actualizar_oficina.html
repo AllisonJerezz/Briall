@@ -1,0 +1,16 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+  <h1 style="padding-top: 110px; text-align: center; margin-bottom: 25px; font-family: 'Signika Negative', sans-serif;">Actualizar Oficina</h1>
+  <div class="container">
+    <div class="card" style="width: 30rem; margin-left: 410px; font-family: 'Signika Negative', sans-serif;">
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-outline-dark">Actualizar</button>
+        </form>
+       </div>
+    </div>
+  </div>
+{% endblock %}

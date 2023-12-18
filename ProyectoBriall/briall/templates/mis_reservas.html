@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+  <h1 style="padding-top: 110px; text-align: center; font-family: 'Signika Negative', sans-serif; padding-bottom: 50px; font-size: 50px;">Mis Reservas</h1>
+  <div class="container">
+    <div class="row">
+        {% for reserva in reservas %}
+        <div class="col-md-3 mb-4">
+          <div class="card" style="width: 20rem; background-color: rgb(231, 231, 231);">
+            <div class="card-body">
+              <h2 style="font-family: 'Signika Negative', sans-serif;">Reserva #{{ reserva.id }}</h2>
+              <p style="font-family: 'Signika Negative', sans-serif;">Fecha: {{ reserva.fecha_reserva }}</p>
+              <a href="{% url 'reagendar_reserva' reserva.id %}" class="btn btn-outline-dark" style="font-family: 'Signika Negative', sans-serif;">Modificar reserva</a>
+              <a href="{% url 'cancelar_reserva' reserva.id %}" class="btn btn-outline-dark" style="font-family: 'Signika Negative', sans-serif;" onclick="return confirm('¿Estás seguro de que quieres cancelar esta reserva? Esta acción no se puede deshacer.');">Anular reserva</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% if reservas|length == 0 %}
+    <p style="text-align: center; font-family: 'Signika Negative', sans-serif;">No tienes ninguna reserva</p>
+  {% endif %}
+  <a href="{% url 'ver_oficinas' %}" class="btn btn-outline-danger" style="font-family: 'Signika Negative', sans-serif; margin-left: 130px; margin-top: 10px; margin-left: 700px;">Volver a oficinas</a>
+{% endblock %}

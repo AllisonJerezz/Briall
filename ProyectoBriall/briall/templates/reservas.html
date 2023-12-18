@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html' %}
+
+{% for reserva in reservas %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ reserva.oficina.nombre }}</h5>
+      <p class="card-text">{{ reserva.oficina.equipamiento }}</p>
+      <p class="card-text">Fecha de reserva: {{ reserva.fecha_reserva }}</p>
+      
+      <!-- Formulario de Modificación -->
+      <form method="post" action="{% url 'modificar_reserva' reserva.id %}" class="form-inline">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-warning">Guardar cambios</button>
+      </form>
+
+      <!-- Formulario de Eliminación -->
+      <form method="post" action="{% url 'eliminar_reserva' reserva.id %}" class="form-inline">
+        {% csrf_token %}
+        {{ eliminar_form.as_p }}
+        <button type="submit" class="btn btn-danger">Eliminar reserva</button>
+      </form>
+
+      <!-- Botón para Mostrar/Ocultar Formularios -->
+      <button class="btn btn-secondary" onclick="toggleForms('{{ reserva.id }}')">Modificar/Eliminar</button>
+    </div>
+  </div>
+{% endfor %}

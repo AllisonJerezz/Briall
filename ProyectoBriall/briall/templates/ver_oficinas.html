@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Signika+Negative:wght@500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <title>Document</title>
+</head>
+<body>
+  {% block content %}
+  <h1 style="padding-top: 110px; padding-bottom: 5px; text-align: center; font-family: 'Signika Negative', sans-serif; font-size: 50px;" class="titulo_oficinas_disponibles">Oficinas disponibles</h1>
+  <div class="container">
+    <p style="padding-bottom: 40px; text-align: center; font-family: 'Signika Negative', sans-serif;"><span style="color: red;">¡IMPORTANTE!</span> El valor es por día y el horario de 8:00 a 18:00 hrs</p>
+    <div class="row">
+      {% for oficina in oficinas %}
+      <div class="col-md-3 mb-4">
+          <div class="card" style="width: 300px; height: 800px; background-color: rgb(231, 231, 231);">
+            <img src="{{ oficina.imagen.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p style="font-family: 'Signika Negative', sans-serif;" class="card-text"><span style="font-size: 20px;">Descripción:</span> <br>  {{ oficina.descripcion }}</p>
+                <p style="font-family: 'Signika Negative', sans-serif;" class="card-text"><span style="font-size: 20px;">Equipamiento:</span> <br> {{ oficina.equipamiento }}</p>
+                <p style="font-family: 'Signika Negative', sans-serif;" class="card-text"><span style="font-size: 20px;">Ubicación:</span> <br> {{ oficina.ubicacion }}</p>
+                <p style="font-family: 'Signika Negative', sans-serif;" class="card-text"><span style="font-size: 20px;">Capacidad:</span> <br> {{ oficina.capacidad }}</p>
+                <p style="font-family: 'Signika Negative', sans-serif;" class="card-text"><span style="font-size: 20px;">Valor:</span> <br> {{ oficina.valor }}</p>
+              </div>
+              <div class="d-flex justify-content-between" style="margin-top: 0px;">
+                {% if user.is_authenticated and user.is_staff %}
+                  <a href="{% url 'actualizar_oficina' oficina.id %}" class="btn btn-outline-dark" style="font-family: 'Signika Negative', sans-serif; margin-left: 40px; margin-bottom: 17px;">Actualizar</a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                  <form method="post" class="container" action="{% url 'reservar_oficina' oficina.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-dark" style="font-family: 'Signika Negative', sans-serif; margin-right: 20px; margin-bottom: 17px;">Reservar</button>
+                  </form>
+                {% endif %}
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% if oficinas|length == 0 %}
+    <p style="text-align: center; font-family: 'Signika Negative', sans-serif;">No hay oficinas disponibles en este momento.</p>
+  {% endif %}
+{% endblock %}
+</body>
+</html>
